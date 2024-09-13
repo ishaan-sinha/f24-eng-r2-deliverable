@@ -74,7 +74,8 @@ const defaultValues: Partial<FormData> = {
   description: null,
 };
 
-export default function AddSpeciesDialog({ userId }: { userId: string }) {
+
+export default function AddLearnMore({ userId }: { userId: string }) {
 
 
   const router = useRouter();
