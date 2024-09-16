@@ -14,11 +14,32 @@ import type { Database } from "@/lib/schema";
 import Image from "next/image";
 
 import DetailedViewDialog from "./detailed-view-dialog";
+import EditSpeciesDialog from "./edit-species-dialog";
+import DeleteSpeciesDialog from "./delete-species-dialog";
 
+import {TypographyP } from "@/components/ui/typography";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
-export default function SpeciesCard({ species }: { species: Species }) {
+
+
+function EditDialog({ userId, species }: { userId: string; species: Species }) {
+  if (userId === species.author) {
+    return <EditSpeciesDialog species={species} />;
+  }
+  return null;
+}
+
+function DeleteDialog({ userId, species }: { userId: string; species: Species }) {
+  if (userId === species.author) {
+    return <DeleteSpeciesDialog species={species} />;
+  }
+  return null;
+}
+
+
+
+export default function SpeciesCard({ species, userId }: { species: Species, userId: string }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
       {species.image && (
@@ -30,6 +51,8 @@ export default function SpeciesCard({ species }: { species: Species }) {
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
       <DetailedViewDialog  species = {species} />
+      <EditDialog userId = {userId} species = {species} />
+      <DeleteDialog userId = {userId} species = {species} />
     </div>
   );
 }

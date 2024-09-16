@@ -16,6 +16,8 @@ import type { Database } from "@/lib/schema";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
+
+
 export default function DetailedViewDialog
 ({ species }: { species: Species }) {
 
@@ -28,6 +30,7 @@ export default function DetailedViewDialog
         <Button className="mt-3 w-full">
           Learn More
         </Button>
+
       </DialogTrigger>
       <DialogContent className="max-h-screen overflow-y-auto sm:max-w-[600px]">
         <DialogHeader>
