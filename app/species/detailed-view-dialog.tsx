@@ -19,7 +19,7 @@ type Species = Database["public"]["Tables"]["species"]["Row"];
 
 
 export default function DetailedViewDialog
-({ species }: { species: Species }) {
+({ species, author }: { species: Species, author: string }) {
 
   const[open, setOpen] = useState<boolean>(false);
 
@@ -51,6 +51,9 @@ export default function DetailedViewDialog
       </h3>
       <h3>
       Endangered:  {species.endangered ? "Yes" : "No"}
+      </h3>
+      <h3>
+        Author: {author}
       </h3>
       </DialogContent>
     </Dialog>

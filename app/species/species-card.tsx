@@ -38,7 +38,7 @@ function DeleteDialog({ userId, species }: { userId: string; species: Species })
 
 
 
-export default function SpeciesCard({ species, userId }: { species: Species, userId: string }) {
+export default function SpeciesCard({ species, userId, author}: { species: Species, userId: string, author: string}) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
       {species.image && (
@@ -49,8 +49,8 @@ export default function SpeciesCard({ species, userId }: { species: Species, use
       <h3 className="mt-3 text-2xl font-semibold">{species.scientific_name}</h3>
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
-      <TypographyP>Author: author</TypographyP>
-      <DetailedViewDialog  species = {species} />
+
+      <DetailedViewDialog  species = {species} author = {author} />
       <EditDialog userId = {userId} species = {species} />
       <DeleteDialog userId = {userId} species = {species} />
     </div>
