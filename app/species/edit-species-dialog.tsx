@@ -18,7 +18,6 @@ import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { spec } from "node:test/reporters";
 import { useState, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -56,6 +55,7 @@ const speciesSchema = z.object({
     .nullable()
     // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
     .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
+  endangered: z.boolean().nullable(),
 });
 
 type FormData = z.infer<typeof speciesSchema>;
@@ -84,6 +84,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
     total_population: species.total_population,
     image: species.image,
     description: species.description,
+    endangered: species.endangered,
   };
 
   // Instantiate form functionality with React Hook Form, passing in the Zod schema (for validation) and default values
@@ -104,6 +105,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
         scientific_name: input.scientific_name,
         total_population: input.total_population,
         image: input.image,
+        endangered: input.endangered,
       },
     ]).eq("id", species.id);
 
@@ -271,6 +273,32 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
                     </FormItem>
                   );
                 }}
+              />
+              <FormField
+                control={form.control}
+                name="endangered"
+                render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Endangered</FormLabel>
+                  <Select
+                      onValueChange={(value) => form.setValue("endangered", value === "true")}
+                      value={form.getValues("endangered")?.toString()}
+                    >
+                  <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                    </FormControl>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="true">Yes</SelectItem>
+                          <SelectItem value="false">No</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  <FormMessage />
+                </FormItem>
+                )}
               />
               <div className="flex">
                 <Button type="submit" className="ml-1 mr-1 flex-auto">

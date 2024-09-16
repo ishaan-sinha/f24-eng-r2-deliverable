@@ -37,41 +37,22 @@ export default function DetailedViewDialog
           <DialogTitle>More Information!</DialogTitle>
         </DialogHeader>
 
-      <TypographyH4>
-        Scientific Name:
-      </TypographyH4>
-      <TypographyP>
-        {species.scientific_name}
-      </TypographyP>
 
-      <TypographyH4>
-        Common Name:
-      </TypographyH4>
-      <TypographyP>
-        {species.common_name}
-      </TypographyP>
-
-      <TypographyH4>
-        Total Population:
-      </TypographyH4>
-      <TypographyP>
-        {species.total_population}
-      </TypographyP>
-
-      <TypographyH4>
-        Kingdom:
-      </TypographyH4>
-      <TypographyP>
-        {species.kingdom}
-      </TypographyP>
-
-      <TypographyH4>
-        Description:
-      </TypographyH4>
-      <TypographyP>
-        {species.description}
-      </TypographyP>
-
+      <h3>
+      Scientific Name:  {species.scientific_name}
+      </h3>
+      <h3>
+      Common Name:  {species.common_name}
+      </h3>
+      <h3>
+      Description:  {species.description}
+      </h3>
+      <h3>
+      Total Population:  {species.total_population}
+      </h3>
+      <h3>
+      Endangered:  {species.endangered ? "Yes" : "No"}
+      </h3>
       </DialogContent>
     </Dialog>
   );
