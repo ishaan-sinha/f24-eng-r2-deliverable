@@ -8,12 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState, type BaseSyntheticEvent } from "react";
-import { TypographyH4, TypographyP } from "@/components/ui/typography";
+import { useState} from "react";
 
 
 import type { Database } from "@/lib/schema";
-import { createServerSupabaseClient } from "@/lib/server-utils";
 
 
 type Species = Database["public"]["Tables"]["species"]["Row"];

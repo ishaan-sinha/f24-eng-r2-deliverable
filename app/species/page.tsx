@@ -21,7 +21,7 @@ export default async function SpeciesList() {
   const sessionId = session.user.id;
 
   const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
-  const {data: user} = await supabase.from("profiles").select("id").eq("id", sessionId);
+  //const {data: user} = await supabase.from("profiles").select("id").eq("id", sessionId);
 
   return (
     <>

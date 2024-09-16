@@ -55,7 +55,9 @@ const speciesSchema = z.object({
     .nullable()
     // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
     .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
-  endangered: z.boolean().nullable(),
+  endangered: z
+    .boolean()
+    .optional(),
 });
 
 type FormData = z.infer<typeof speciesSchema>;
@@ -97,8 +99,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
   const onSubmit = async (input: FormData) => {
     // The `input` prop contains data that has already been processed by zod. We can now use it in a supabase query
     const supabase = createBrowserSupabaseClient();
-    const { error } = await supabase.from("species").update([
-      {
+    const { error } = await supabase.from("species").update({
         common_name: input.common_name,
         description: input.description,
         kingdom: input.kingdom,
@@ -106,8 +107,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
         total_population: input.total_population,
         image: input.image,
         endangered: input.endangered,
-      },
-    ]).eq("id", species.id);
+    }).eq("id", species.id);
 
     // Catch and report errors from Supabase and exit the onSubmit function with an early 'return' if an error occurred.
     if (error) {
@@ -277,7 +277,7 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
               <FormField
                 control={form.control}
                 name="endangered"
-                render={({ field }) => (
+                render={() => (
                 <FormItem>
                   <FormLabel>Endangered</FormLabel>
                   <Select
