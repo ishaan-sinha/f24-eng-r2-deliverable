@@ -13,6 +13,8 @@ import { TypographyH4, TypographyP } from "@/components/ui/typography";
 
 
 import type { Database } from "@/lib/schema";
+import { createServerSupabaseClient } from "@/lib/server-utils";
+
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
@@ -20,7 +22,6 @@ type Species = Database["public"]["Tables"]["species"]["Row"];
 
 export default function DetailedViewDialog
 ({ species }: { species: Species }) {
-
 
   const[open, setOpen] = useState<boolean>(false);
 

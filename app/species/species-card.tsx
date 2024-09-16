@@ -22,7 +22,6 @@ import {TypographyP } from "@/components/ui/typography";
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
 
-
 function EditDialog({ userId, species }: { userId: string; species: Species }) {
   if (userId === species.author) {
     return <EditSpeciesDialog species={species} />;
@@ -50,6 +49,7 @@ export default function SpeciesCard({ species, userId }: { species: Species, use
       <h3 className="mt-3 text-2xl font-semibold">{species.scientific_name}</h3>
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
+      <TypographyP>Author: author</TypographyP>
       <DetailedViewDialog  species = {species} />
       <EditDialog userId = {userId} species = {species} />
       <DeleteDialog userId = {userId} species = {species} />
