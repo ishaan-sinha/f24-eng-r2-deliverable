@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { useState, useEffect} from "react";
+import { useState} from "react";
 
 
 
@@ -28,7 +28,7 @@ Read more here: https://legacy.react-hook-form.com/api/useform/
 */
 
 
-export default function SearchSpeciesDialog({ data }: { data: object }) {
+export default function SearchSpeciesDialog() {
   const [open, setOpen] = useState(false);
 
   /*const [searchTerm, setSearchTerm] = useState("");

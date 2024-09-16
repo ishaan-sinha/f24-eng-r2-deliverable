@@ -136,10 +136,11 @@ export default function EditSpeciesDialog({ species }: { species: Species }) {
     });
   };
 
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">
+        <Button variant="secondary" className = "w-full">
           Edit Species
         </Button>
       </DialogTrigger>

@@ -23,7 +23,7 @@ export default async function SpeciesList() {
 
   const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
   const {data: user} = await supabase.from("profiles").select("id, display_name");
-  const {data: allspecies} = await supabase.from("species").select("*");
+  //const {data: allspecies} = await supabase.from("species").select("*");
   const userDictionary = user?.reduce((acc: Record<string, string>, user) => {
     acc[user.id] = user.display_name;
     return acc;
@@ -38,7 +38,7 @@ export default async function SpeciesList() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <SearchSpeciesDialog data={allspecies} />
+        <SearchSpeciesDialog/>
       </div>
 
       <Separator className="my-4" />
