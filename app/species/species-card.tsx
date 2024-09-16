@@ -17,8 +17,6 @@ import DetailedViewDialog from "./detailed-view-dialog";
 import EditSpeciesDialog from "./edit-species-dialog";
 import DeleteSpeciesDialog from "./delete-species-dialog";
 
-import {TypographyP } from "@/components/ui/typography";
-
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
 

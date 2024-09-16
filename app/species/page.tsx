@@ -4,7 +4,7 @@ import { createServerSupabaseClient } from "@/lib/server-utils";
 import { redirect } from "next/navigation";
 import AddSpeciesDialog from "./add-species-dialog";
 import SpeciesCard from "./species-card";
-import { Console } from "console";
+import SearchSpeciesDialog from "./search-species-dialog";
 
 export default async function SpeciesList() {
   // Create supabase server component client and obtain user session from stored cookie
@@ -23,6 +23,7 @@ export default async function SpeciesList() {
 
   const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
   const {data: user} = await supabase.from("profiles").select("id, display_name");
+  const {data: allspecies} = await supabase.from("species").select("*");
   const userDictionary = user?.reduce((acc: Record<string, string>, user) => {
     acc[user.id] = user.display_name;
     return acc;
@@ -35,6 +36,11 @@ export default async function SpeciesList() {
         <TypographyH2>Species List</TypographyH2>
         <AddSpeciesDialog userId={sessionId} />
       </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <SearchSpeciesDialog data={allspecies} />
+      </div>
+
       <Separator className="my-4" />
       <div className="flex flex-wrap justify-center">
         {species?.map((species) => <SpeciesCard key={species.id} species={species} userId={sessionId} author={userDictionary[species.author] ?? "Unknown"} />)}
